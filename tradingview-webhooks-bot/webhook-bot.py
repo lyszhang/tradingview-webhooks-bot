@@ -9,6 +9,7 @@ expect to update this as much as possible to add features as they become availab
 Until then, if you run into any bugs let me know!
 """
 
+import json
 from actions import send_order, parse_webhook
 from auth import get_token
 from flask import Flask, request, abort
@@ -27,8 +28,12 @@ def root():
 def webhook():
     if request.method == 'POST':
         # Parse the string data from tradingview into a python dict
-        data = parse_webhook(request.get_data(as_text=True))
+        # data = parse_webhook(request.get_data(as_text=True))
+        data = request.get_data(as_text=True)
         print('POST Received:', data)
+        text = json.loads(data)
+        print('price', text['action'])
+        return '', 200
         # Check that the key is correct
         # if get_token() == data['key']:
         #     print(' [Alert Received] ')
