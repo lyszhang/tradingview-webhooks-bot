@@ -32,3 +32,5 @@ def bitmex_order(data):
                            api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
     orderbook = client.OrderBook.OrderBook_getL2(symbol='XBTUSD', depth=20).result()
     print("order res", orderbook)
+
+

@@ -9,12 +9,15 @@ expect to update this as much as possible to add features as they become availab
 Until then, if you run into any bugs let me know!
 """
 
-from actions import bitmex_order, parse_webhook
+from actions import parse_webhook
+from bitmexAPI import BitmexClient
 from auth import get_token
 from flask import Flask, request, abort
 
+
 # Create Flask object called app.
 app = Flask(__name__)
+client = BitmexClient(key="uQHAOsbS9sVLi798Sku87unY", secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
 
 
 # Create root to easily let us know its on/working.
@@ -33,7 +36,7 @@ def webhook():
         if get_token() == data['token']:
             print(' [Alert Received] ')
             print('POST Received:', data)
-            bitmex_order(data)
+            client.get_orderbook('XBTUSD', 2)
             return '', 200
         else:
             abort(403)
