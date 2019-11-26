@@ -3,8 +3,8 @@ import json
 
 
 class BitmexClient(object):
-    def __init__(self, key, secret, test=True):
-        self.client = bitmex.bitmex(test, key, secret)
+    def __init__(self, api_key, api_secret, test=True):
+        self.client = bitmex.bitmex(test, api_key, api_secret)
 
     def place_order(self, action='buy', currency='XBTUSD', amount=0):
         orders_numb = amount if action == 'buy' else -amount
