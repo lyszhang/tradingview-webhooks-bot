@@ -4,9 +4,10 @@ import json
 
 class BitmexClient(object):
     def __init__(self, api_key, api_secret, test=True):
-        self.client = bitmex.bitmex(test=True, api_key="uQHAOsbS9sVLi798Sku87unY",
-                                    api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
-        # self.client = bitmex.bitmex(test, api_key, api_secret)
+        # self.client = bitmex.bitmex(test=True, api_key="uQHAOsbS9sVLi798Sku87unY",
+        #                             api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
+        print("api_key", api_key)
+        self.client = bitmex.bitmex(test=test, api_key=api_key, api_secret=api_secret)
 
     def place_order(self, action='buy', currency='XBTUSD', amount=0):
         orders_numb = amount if action == 'buy' else -amount
