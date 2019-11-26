@@ -27,7 +27,7 @@ def calc_price(given_price):
 
 
 def bitmex_order(data):
-    client = bitmex.bitmex(test=False,
+    client = bitmex.bitmex(test=True,
                            api_key="uQHAOsbS9sVLi798Sku87unY",
                            api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
     orderbook = client.OrderBook.OrderBook_getL2(symbol='XBTUSD', depth=20).result()
