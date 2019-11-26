@@ -1,5 +1,3 @@
-import ccxt
-import ast
 import json
 import bitmex
 
@@ -30,7 +28,7 @@ def calc_price(given_price):
 
 def bitmex_order(data):
     client = bitmex.bitmex(test=False,
-                           api_key="wBjcgxQfLBBTgSzaKtJCDh0E",
-                           api_secret="CX543A3hE1oHj_O19u_nxouCCuwDK71VB3nDqMJxpPJzLBQC")
+                           api_key="uQHAOsbS9sVLi798Sku87unY",
+                           api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
     orderbook = client.OrderBook.OrderBook_getL2(symbol='XBTUSD', depth=20).result()
     print("order res", orderbook)
