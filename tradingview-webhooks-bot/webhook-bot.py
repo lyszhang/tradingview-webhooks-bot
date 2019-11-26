@@ -9,6 +9,7 @@ expect to update this as much as possible to add features as they become availab
 Until then, if you run into any bugs let me know!
 """
 
+import logging
 from actions import parse_webhook
 from bitmexAPI import BitmexClient
 from auth import get_token
@@ -38,7 +39,8 @@ def webhook():
         if get_token() == data['token']:
             print(' [Alert Received] ')
             print('POST Received:', data)
-            
+            app.logger.info("POST Received:%s", data)
+
             if data['action'] == 'long' or data['action'] == 'short close':
                 res = client.place_order('buy', 'XBTUSD', 2)
                 return res[0].__str__(), 200
@@ -53,4 +55,5 @@ def webhook():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename="log.txt", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     app.run(host="0.0.0.0", port=80, debug=True)
