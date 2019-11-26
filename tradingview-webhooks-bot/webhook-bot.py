@@ -17,8 +17,8 @@ from flask import Flask, request, abort
 
 # Create Flask object called app.
 app = Flask(__name__)
-client = BitmexClient(api_key='uQHAOsbS9sVLi798Sku87unY',
-                      api_secret='rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4',
+client = BitmexClient(api_key='1MkQqcpmTQFsPSX-uRL4OtTq',
+                      api_secret='UOMrqg1s0P2XQCAVFRA80oPMpePp6QI27zGvKcEm2ifjb3LE',
                       test=True)
 
 
@@ -38,8 +38,14 @@ def webhook():
         if get_token() == data['token']:
             print(' [Alert Received] ')
             print('POST Received:', data)
-            client.get_orderbook('XBTUSD', 2)
-            return '', 200
+            
+            if data['action'] == 'long' or data['action'] == 'short close':
+                res = client.place_order('buy', 'XBTUSD', 2)
+                return res[0].__str__(), 200
+            if data['action'] == 'short' or data['action'] == 'long close':
+                res = client.place_order('sell', 'XBTUSD', 2)
+                return res[0].__str__(), 200
+
         else:
             abort(403)
     else:
@@ -47,4 +53,4 @@ def webhook():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=80, debug=True)
