@@ -17,7 +17,7 @@ from flask import Flask, request, abort
 
 # Create Flask object called app.
 app = Flask(__name__)
-client = BitmexClient(api_key="uQHAOsbS9sVLi798Sku87unY", api_secret="rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4")
+client = BitmexClient(api_key='uQHAOsbS9sVLi798Sku87unY', api_secret='rETjHLozveFjS8pLSgv5OZ5nT8HM1xJYrRFHWs9NI8IhQ3X4')
 
 
 # Create root to easily let us know its on/working.
