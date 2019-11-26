@@ -1,6 +1,7 @@
 import ccxt
 import ast
-
+import json
+import bitmex
 
 def parse_webhook(webhook_data):
 
@@ -9,9 +10,8 @@ def parse_webhook(webhook_data):
     :param webhook_data: POST data from tradingview, as a string.
     :return: Dictionary version of string.
     """
-
-    data = ast.literal_eval(webhook_data)
-    return data
+    text = json.loads(webhook_data)
+    return text
 
 
 def calc_price(given_price):
@@ -50,3 +50,10 @@ def send_order(data):
     # This is the last step, the response from the exchange will tell us if it made it and what errors pop up if not.
     print('Exchange Response:', order)
 
+
+def bitmex_order(data):
+    client = bitmex.bitmex(test=False,
+                           api_key="wBjcgxQfLBBTgSzaKtJCDh0E",
+                           api_secret="CX543A3hE1oHj_O19u_nxouCCuwDK71VB3nDqMJxpPJzLBQC")
+    result = client.Instrument.Instrument_get(filter=json.dumps({'symbol': 'XBTJPY'})).result()
+    print("order res", result)
