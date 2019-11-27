@@ -29,6 +29,13 @@ def root():
     return 'online'
 
 
+# Create root to easily let us know its on/working.
+@app.route('/logs', methods=['GET'])
+def logs():
+    with open('log.txt', 'r') as f:
+        return f.read(), 200
+
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     if request.method == 'POST':
